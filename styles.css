@@ -1,0 +1,1209 @@
+/* ===================================================================
+   STORY HOMES — Investor Landing Page
+   Brand: Lora (headers) + Montserrat (body)
+   Palette: Forest #5C6D62 · Olive #8C9965 · Ivory #F6F1EC
+            Champagne #E3CDBC · Light Brown #9B8B7C · Black #010101
+   =================================================================== */
+
+:root {
+  --black: #010101;
+  --ink: #23281f;
+  --ivory: #F6F1EC;
+  --champagne: #E3CDBC;
+  --brown: #9B8B7C;
+  --forest: #5C6D62;
+  --forest-deep: #47554b;
+  --olive: #8C9965;
+  --white: #ffffff;
+
+  --muted: #6b7267;
+  --line: rgba(1, 1, 1, 0.09);
+  --line-soft: rgba(1, 1, 1, 0.06);
+
+  --shadow-sm: 0 1px 2px rgba(1, 1, 1, 0.05), 0 4px 14px rgba(1, 1, 1, 0.05);
+  --shadow-md: 0 10px 30px rgba(35, 40, 31, 0.10);
+  --shadow-lg: 0 30px 70px rgba(35, 40, 31, 0.18);
+
+  --radius-sm: 12px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  --maxw: 1180px;
+  --font-head: "Lora", Georgia, serif;
+  --font-body: "Montserrat", system-ui, -apple-system, sans-serif;
+
+  --ease: cubic-bezier(0.4, 0, 0.15, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--ivory);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+a { color: inherit; text-decoration: none; }
+img, video { display: block; max-width: 100%; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.accent { color: var(--forest); font-style: italic; }
+.olive-text { color: var(--olive); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  padding: 15px 28px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
+    background 0.25s var(--ease), color 0.25s var(--ease);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--forest);
+  color: var(--ivory);
+  box-shadow: 0 8px 20px rgba(92, 109, 98, 0.28);
+}
+.btn-primary:hover {
+  background: var(--forest-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(92, 109, 98, 0.38);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn-ghost:hover { border-color: var(--forest); color: var(--forest); }
+.btn-light {
+  background: var(--ivory);
+  color: var(--forest);
+}
+.btn-light:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-dark {
+  background: #14170f;
+  color: var(--ivory);
+  box-shadow: 0 8px 20px rgba(1, 1, 1, 0.28);
+}
+.btn-dark:hover { background: #000; transform: translateY(-2px); box-shadow: 0 14px 30px rgba(1, 1, 1, 0.38); }
+.btn-block { width: 100%; }
+.btn-lg { padding: 17px 34px; font-size: 1rem; }
+
+/* ---------- Eyebrow / chips ---------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest);
+  background: rgba(92, 109, 98, 0.09);
+  border: 1px solid rgba(92, 109, 98, 0.18);
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+}
+.eyebrow .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--olive);
+  box-shadow: 0 0 0 4px rgba(140, 153, 101, 0.2);
+}
+
+.section { padding: 100px 0; }
+.section-head { max-width: 660px; margin: 0 auto 56px; text-align: center; }
+.section-head.left { margin-left: 0; text-align: left; }
+.section-head h2 { font-size: clamp(2rem, 4vw, 3rem); margin: 18px 0 16px; }
+.section-head p { color: var(--muted); font-size: 1.08rem; }
+
+/* ===================================================================
+   NAV
+   =================================================================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 24px;
+  transition: transform 0.45s var(--ease);
+}
+/* Smart nav: slide up out of view when scrolling down, return on scroll up */
+.nav.nav--hidden { transform: translateY(-160%); }
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 10px 12px 10px 26px;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: saturate(170%) blur(20px);
+  backdrop-filter: saturate(170%) blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-pill);
+  /* Beveled, floating look: top highlight + bottom lip + drop shadow */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(1, 1, 1, 0.05),
+    0 14px 34px rgba(35, 40, 31, 0.14),
+    0 3px 8px rgba(35, 40, 31, 0.08);
+  transition: padding 0.3s var(--ease), background 0.3s var(--ease);
+}
+.nav.scrolled .nav-inner {
+  background: rgba(255, 255, 255, 0.96);
+  padding: 7px 12px 7px 24px;
+}
+.nav-logo { height: 44px; transition: height 0.3s var(--ease); display: block; }
+.nav.scrolled .nav-logo { height: 38px; }
+.nav-links { display: flex; align-items: center; gap: 34px; }
+.nav-links a.link {
+  font-size: 0.9rem; font-weight: 500; color: var(--ink);
+  transition: color 0.2s;
+}
+.nav-links a.link:hover { color: var(--forest); }
+.nav-cta { display: flex; align-items: center; gap: 14px; }
+.nav-actions { display: flex; align-items: center; gap: 14px; }
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 42px; height: 42px;
+  background: none; border: none; cursor: pointer;
+  flex-shrink: 0;
+}
+.nav-burger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+}
+.nav--menu-open .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav--menu-open .nav-burger span:nth-child(2) { opacity: 0; }
+.nav--menu-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-mobile-panel { display: none; }
+
+/* ===================================================================
+   HERO
+   =================================================================== */
+.hero {
+  position: relative;
+  padding: 150px 0 90px;
+  background:
+    radial-gradient(1100px 620px at 82% -8%, rgba(140, 153, 101, 0.16), transparent 60%),
+    radial-gradient(900px 560px at 5% 20%, rgba(227, 205, 188, 0.4), transparent 55%),
+    var(--ivory);
+  overflow: hidden;
+}
+/* Desktop hero layout (grid columns, centering, phone sizing) is finalized in the
+   min-width: 981px block within the RESPONSIVE section at the end of this file, so it
+   can safely override the base .hero-grid / .hero-visual / .phone rules below in the
+   cascade. Only the viewport-height centering lives here since nothing below overrides it. */
+@media (min-width: 981px) {
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 165px 0 130px;
+  }
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero h1 {
+  /* Matches the site-wide section heading size (.section-head h2) */
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 18px 0 20px;
+}
+/* Mobile: no forced break, the headline flows naturally and wraps based on available
+   width (desktop forces a break after "Cash Flow." — see the min-width:981px block below). */
+.hero h1 .accent { white-space: nowrap; }
+.hero-sub {
+  font-size: 1.18rem;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 26px;
+}
+.hero-sub strong { color: var(--ink); font-weight: 600; }
+
+/* Hero value points. Mobile: plain 2x2 grid below the phone. Desktop (see RESPONSIVE
+   section): glass cards floating around the phone instead. */
+.hero-floats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 26px;
+  max-width: 520px;
+  margin: 24px auto 0;
+}
+.float-glass {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.float-glass .fg-ico {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  border-radius: 11px;
+  background: rgba(92, 109, 98, 0.1);
+  color: var(--forest);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+/* signup form */
+.signup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+  margin-bottom: 20px;
+}
+.signup-row { display: flex; gap: 10px; }
+.field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 4px 6px 4px 18px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field:focus-within { border-color: var(--forest); box-shadow: 0 0 0 4px rgba(92,109,98,0.12); }
+.field svg { flex-shrink: 0; color: var(--brown); }
+.field input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: var(--ink);
+  padding: 12px 0;
+  min-width: 0;
+}
+.signup .btn-primary { padding: 15px 24px; }
+.hero-form-note {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.82rem; color: var(--muted);
+}
+.hero-form-note svg { color: var(--olive); }
+
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.stars { color: #d8a23c; letter-spacing: 2px; font-size: 1.05rem; }
+.hero-trust .t-text { font-size: 0.88rem; color: var(--muted); }
+.hero-trust .t-text b { color: var(--ink); }
+.avatars { display: flex; }
+.avatars span {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 2px solid var(--ivory);
+  margin-left: -10px;
+  background-size: cover; background-position: center;
+  font-size: 0.7rem; font-weight: 700; color: var(--ivory);
+  display: flex; align-items: center; justify-content: center;
+}
+.avatars span:first-child { margin-left: 0; }
+
+/* ---------- Phone mockup (real frame photo with a transparent screen cutout) ---------- */
+/* Now sits between hero-sub and hero-points in the DOM, so it needs its own vertical
+   breathing room rather than relying on the old grid gap. */
+.hero-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0 34px;
+}
+.phone {
+  position: relative;
+  width: 300px;
+  /* Matches the frame artwork's native 512x1048 canvas so the screen cutout stays aligned at any size */
+  aspect-ratio: 512 / 1048;
+  z-index: 2;
+  filter: drop-shadow(0 30px 50px rgba(35, 40, 31, 0.28));
+}
+/* The frame graphic sits on top; its transparent screen area reveals the video/UI layer beneath it */
+.phone-frame-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+}
+.phone-screen {
+  position: absolute;
+  /* A plain rectangle, deliberately over-extended under the opaque bezel on every side.
+     No border-radius: the frame image (layered on top, z-index 4) has its own transparent
+     screen cutout, and its opaque bezel naturally clips this rectangle down to that rounded
+     shape. Rounding the rectangle ourselves risked cutting corners MORE than the real cutout,
+     which is what left a sliver of background visible in the corners. */
+  left: 4.5%; right: 5.2%;
+  top: 3%; bottom: 3%;
+  overflow: hidden;
+  background: #000;
+  z-index: 1;
+}
+.phone-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  /* Anchor to the top so the subject's face/torso stays framed under the notch */
+  object-position: top center;
+}
+/* Blends the video's top edge into the bezel/notch, no visible seam regardless of crop */
+.phone-scrim {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 22%;
+  background: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.5) 45%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.phone-ui {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 14px;
+  background: linear-gradient(180deg, rgba(1,1,1,0.15) 0%, transparent 30%, transparent 55%, rgba(1,1,1,0.72) 100%);
+  z-index: 2;
+}
+.phone-top { display: flex; align-items: center; justify-content: space-between; }
+.phone-logo {
+  height: 18px;
+  width: auto;
+  filter: drop-shadow(0 1px 3px rgba(1, 1, 1, 0.35));
+}
+.phone-live {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.62rem; font-weight: 700; color: var(--ivory);
+  white-space: nowrap;
+  background: rgba(1,1,1,0.35); backdrop-filter: blur(6px);
+  padding: 5px 10px; border-radius: var(--radius-pill);
+}
+.phone-live .pulse {
+  width: 7px; height: 7px; border-radius: 50%; background: #7fd18a;
+  animation: pulse 1.6s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(127,209,138,0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(127,209,138,0); }
+  100% { box-shadow: 0 0 0 0 rgba(127,209,138,0); }
+}
+.phone-card {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow: 0 16px 34px rgba(1, 1, 1, 0.28);
+}
+/* Notification-style header: app icon, app name, timestamp */
+.phone-card .pc-notif-head { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; }
+.phone-card .pc-app-icon {
+  width: 20px; height: 20px; border-radius: 6px;
+  background: var(--forest); color: var(--ivory);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-style: italic; font-size: 0.66rem; font-weight: 600;
+  flex-shrink: 0;
+}
+.phone-card .pc-app-name { font-size: 0.68rem; font-weight: 700; color: var(--ink); letter-spacing: 0.01em; }
+.phone-card .pc-time { margin-left: auto; font-size: 0.64rem; color: var(--muted); }
+.phone-card .pc-meta { font-size: 0.66rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; text-align: center; }
+.phone-card .pc-title { font-family: var(--font-head); font-size: 1.05rem; margin: 3px 0 2px; text-align: center; }
+.phone-card .pc-specs { font-size: 0.72rem; color: var(--muted); text-align: center; }
+.phone-card .pc-stats { display: flex; justify-content: center; gap: 12px; margin: 11px 0 12px; }
+.phone-card .pc-stat { text-align: center; }
+.phone-card .pc-stat .n { font-family: var(--font-head); font-size: 1.02rem; color: var(--forest); font-weight: 600; }
+.phone-card .pc-stat .l { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.phone-card .pc-btn {
+  background: var(--forest); color: var(--ivory);
+  text-align: center; font-weight: 700; font-size: 0.86rem;
+  padding: 11px; border-radius: var(--radius-pill);
+}
+
+/* ===================================================================
+   LOGO / MARQUEE STRIP
+   =================================================================== */
+.strip {
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(255,255,255,0.4);
+  padding: 26px 0;
+}
+.strip-label { text-align: center; font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+.strip-items {
+  display: flex; align-items: center; justify-content: center;
+  gap: 42px; flex-wrap: wrap;
+  font-family: var(--font-head); font-size: 1.05rem; color: var(--brown);
+}
+.strip-items span { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.strip-items svg { color: var(--olive); flex-shrink: 0; }
+
+/* ===================================================================
+   STATS BAR
+   =================================================================== */
+.stats {
+  background: var(--forest);
+  color: var(--ivory);
+  position: relative;
+  overflow: hidden;
+}
+.stats::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(700px 340px at 85% 120%, rgba(140,153,101,0.35), transparent 60%);
+  pointer-events: none;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative; z-index: 1;
+}
+.stat {
+  padding: 20px 26px;
+  border-left: 1px solid rgba(246,241,236,0.14);
+  text-align: center;
+}
+.stat:first-child { border-left: none; }
+.stat .num {
+  font-family: var(--font-head);
+  font-size: clamp(2.2rem, 4vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat .num .suffix { color: var(--champagne); }
+.stat .label { font-size: 0.86rem; color: rgba(246,241,236,0.8); letter-spacing: 0.02em; }
+
+/* ===================================================================
+   HOW IT WORKS
+   =================================================================== */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.step {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  padding: 34px 30px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.step:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.step-num {
+  font-family: var(--font-head);
+  font-size: 0.9rem; font-weight: 700;
+  color: var(--olive);
+  border: 1px solid rgba(140,153,101,0.35);
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 22px;
+}
+.step-ico {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: rgba(92,109,98,0.1); color: var(--forest);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.step h3 { font-size: 1.3rem; margin-bottom: 10px; }
+.step p { color: var(--muted); font-size: 0.96rem; }
+.how-cta { display: flex; justify-content: center; margin-top: 48px; }
+
+/* ===================================================================
+   FLOW CHART — 5-node benefits flow with an animated connecting line.
+   Mobile-first: a plain stacked list. Desktop (min-width:981px, see
+   RESPONSIVE section) upgrades to the absolute-positioned, uniformly-sized
+   card layout connected by a straight, right-angled line, same pattern
+   as .hero-floats/.float-glass.
+   =================================================================== */
+.flow { margin-top: 10px; }
+.flow-svg { display: none; }
+.flow-nodes { display: flex; flex-direction: column; gap: 24px; align-items: center; position: relative; z-index: 1; }
+.flow-node { position: static; transform: none; width: 100%; max-width: 320px; }
+.flow-node-inner {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  background: var(--white);
+  border: 1px solid var(--forest);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  box-shadow: var(--shadow-sm);
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), box-shadow 0.3s var(--ease);
+}
+.flow-node:hover .flow-node-inner { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+.flow.in .flow-node-inner { opacity: 1; transform: none; }
+.flow.in .flow-node:hover .flow-node-inner { transform: translateY(-4px); }
+.flow-nodes > .flow-node:nth-child(1) .flow-node-inner { transition-delay: 0.1s; }
+.flow-nodes > .flow-node:nth-child(2) .flow-node-inner { transition-delay: 0.35s; }
+.flow-nodes > .flow-node:nth-child(3) .flow-node-inner { transition-delay: 0.6s; }
+.flow-nodes > .flow-node:nth-child(4) .flow-node-inner { transition-delay: 0.9s; }
+.flow-nodes > .flow-node:nth-child(5) .flow-node-inner { transition-delay: 1.15s; }
+.flow-nodes > .flow-node:nth-child(6) .flow-node-inner { transition-delay: 1.4s; }
+.flow-ico {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(92, 109, 98, 0.1);
+  color: var(--forest);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease);
+}
+.flow-node:hover .flow-ico { transform: scale(1.08); }
+.flow-node h3 { font-size: 1.1rem; margin-bottom: 6px; }
+.flow-node p { color: var(--muted); font-size: 0.92rem; }
+.flow-path { fill: none; stroke: rgba(92, 109, 98, 0.4); stroke-width: 2.5; stroke-linecap: round; }
+.flow-dot { fill: var(--olive); filter: drop-shadow(0 0 4px rgba(140, 153, 101, 0.6)); }
+
+/* ===================================================================
+   DEALS CAROUSEL (cash flow + cosmetic)
+   =================================================================== */
+.deals-carousel { position: relative; width: 100%; overflow: hidden; }
+.deals-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 4px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.deals-track::-webkit-scrollbar { display: none; }
+/* Three cards per view within the normal centered content width. Arrows page by a full
+   set of 3 (see script.js); native drag/swipe/trackpad scroll still works too. */
+.deal-card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  scroll-snap-align: start;
+  background: var(--white);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.deal-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.deal-media { position: relative; height: 210px; }
+.deal-media img { width: 100%; height: 100%; object-fit: cover; }
+.deal-badge {
+  position: absolute; top: 14px; left: 14px;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--forest); background: rgba(255,255,255,0.92); backdrop-filter: blur(4px);
+  padding: 6px 12px; border-radius: var(--radius-pill);
+}
+.deal-body { padding: 22px; }
+.deal-loc { font-family: var(--font-head); font-size: 1.2rem; color: var(--ink); margin-bottom: 4px; }
+.deal-specs { font-size: 0.86rem; color: var(--muted); margin-bottom: 16px; }
+.deal-stats { display: flex; gap: 16px; padding-top: 16px; border-top: 1px solid var(--line-soft); }
+.deal-stat .n { font-family: var(--font-head); font-size: 1.05rem; color: var(--forest); font-weight: 600; }
+.deal-stat .l { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.deal-body .btn { margin-top: 18px; padding: 12px 20px; font-size: 0.88rem; }
+
+.deals-nav { display: flex; justify-content: center; gap: 10px; margin-top: 28px; }
+.deals-arrow {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--white); border: 1px solid var(--line);
+  color: var(--forest); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.deals-arrow:hover { background: var(--forest); color: var(--ivory); border-color: var(--forest); transform: translateY(-2px); }
+
+/* ===================================================================
+   VIDEO GALLERY (team at work) — sits inside How It Works, above the steps
+   =================================================================== */
+.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-bottom: 56px; }
+.vid-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  background: #14170f;
+}
+.vid-card video { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
+.vid-card:hover video { transform: scale(1.05); }
+.vid-card::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, transparent 40%, rgba(1,1,1,0.72) 100%);
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease);
+}
+.vid-meta { position: absolute; left: 16px; bottom: 14px; z-index: 2; color: var(--ivory); transition: opacity 0.25s var(--ease); }
+.vid-meta .vm-loc { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--champagne); }
+.vid-meta .vm-title { font-family: var(--font-head); font-size: 1.05rem; }
+.vid-play {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(246,241,236,0.9); color: var(--forest);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+}
+/* Once playing: hand control to the native <video controls> UI */
+.vid-card.playing { cursor: default; }
+.vid-card.playing:hover video { transform: none; }
+.vid-card.playing::after,
+.vid-card.playing .vid-play,
+.vid-card.playing .vid-meta { opacity: 0; pointer-events: none; }
+.vid-card:hover .vid-play { transform: scale(1.1); }
+
+/* ===================================================================
+   TESTIMONIALS CAROUSEL
+   =================================================================== */
+.testi-section { background: #0d0f0d; overflow: hidden; }
+.testi-section .section-head h2 { color: var(--ivory); }
+.testi-section .section-head p { color: rgba(246, 241, 236, 0.68); }
+.testi-section .eyebrow {
+  color: var(--champagne);
+  background: rgba(246, 241, 236, 0.07);
+  border-color: rgba(246, 241, 236, 0.18);
+}
+.testi-section .eyebrow .dot { background: var(--olive); box-shadow: 0 0 0 4px rgba(140,153,101,0.22); }
+.marquee {
+  position: relative;
+  display: flex;
+  gap: 22px;
+  width: max-content;
+  animation: scroll-x 46s linear infinite;
+}
+.marquee:hover { animation-play-state: paused; }
+.marquee-mask { position: relative; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.testi {
+  width: 380px; flex-shrink: 0;
+  background: rgba(92, 109, 98, 0.16);
+  border: 1px solid rgba(140, 153, 101, 0.22);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex; flex-direction: column;
+}
+.testi .t-stars { color: #e0b054; letter-spacing: 2px; margin-bottom: 14px; font-size: 0.95rem; }
+.testi p { font-size: 0.96rem; color: rgba(246, 241, 236, 0.92); flex: 1; }
+.testi .t-who { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+.testi .t-av {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--olive); color: #14170f;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-weight: 600; font-size: 1rem;
+  flex-shrink: 0;
+}
+.testi .t-name { font-weight: 600; font-size: 0.92rem; color: var(--ivory); }
+.testi .t-role { font-size: 0.78rem; color: rgba(246, 241, 236, 0.6); }
+/* Agent tag sits on its own line below the reviewer */
+.testi .t-agent {
+  align-self: flex-start;
+  margin-top: 16px;
+  font-size: 0.72rem; font-weight: 600; color: var(--champagne);
+  background: rgba(140, 153, 101, 0.16);
+  border: 1px solid rgba(140, 153, 101, 0.22);
+  padding: 5px 12px; border-radius: var(--radius-pill);
+}
+
+/* Trust badge moved out of the hero into this section */
+.testi-trust {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  margin-top: 46px;
+}
+.testi-trust .tt-text { font-size: 0.9rem; color: rgba(246, 241, 236, 0.72); line-height: 1.4; }
+.testi-trust .tt-text .stars { display: block; color: #e0b054; letter-spacing: 2px; font-size: 1rem; }
+.testi-trust .tt-text b { color: var(--ivory); font-weight: 600; }
+.testi-cta { display: flex; justify-content: center; margin-top: 32px; }
+
+/* ===================================================================
+   NETWORKING / PERK
+   =================================================================== */
+.perk { background: var(--white); }
+.perk-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 54px; align-items: center; }
+.perk h2 { font-size: clamp(2rem, 4vw, 2.9rem); margin: 18px 0 18px; }
+.perk p { color: var(--muted); font-size: 1.06rem; margin-bottom: 24px; }
+.perk-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 30px; }
+.perk-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.98rem; }
+.perk-list .pl-ico {
+  flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(140,153,101,0.16); color: var(--olive);
+  display: flex; align-items: center; justify-content: center; margin-top: 2px;
+}
+.perk-media { position: relative; }
+.perk-video {
+  width: 100%; border-radius: var(--radius-lg);
+  aspect-ratio: 4 / 3; object-fit: cover;
+  box-shadow: var(--shadow-md);
+}
+.perk-badge {
+  position: absolute; bottom: -18px; left: -18px;
+  background: var(--forest); color: var(--ivory);
+  border-radius: var(--radius); padding: 18px 22px;
+  box-shadow: var(--shadow-md);
+}
+.perk-badge .pb-n { font-family: var(--font-head); font-size: 1.7rem; font-weight: 600; }
+.perk-badge .pb-l { font-size: 0.78rem; color: rgba(246,241,236,0.85); }
+
+/* ===================================================================
+   BUILDING PARALLAX BAND — sits between Membership Perks and Real Investor Stories
+   =================================================================== */
+/* Uses a real <img>, not a CSS background, because background-attachment:fixed sizes
+   "cover" relative to the viewport rather than this element — on a slim band that made
+   the crop drift depending on scroll position instead of always framing the building.
+   The img is oversized and nudged by JS (see script.js) for a subtle parallax feel while
+   object-position keeps the building itself centered in the visible slice at all times. */
+.building-parallax {
+  position: relative;
+  height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.building-parallax-media { position: absolute; inset: 0; overflow: hidden; }
+.building-parallax-img {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 100%; height: 145%;
+  object-fit: cover;
+  object-position: center 40%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+.building-parallax::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(1,1,1,0.55), rgba(35,40,31,0.62));
+}
+.building-parallax-content {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 20px;
+  padding: 0 24px;
+}
+.building-parallax-content .building-parallax-logo { height: 56px; width: auto; }
+.building-parallax-headline {
+  color: var(--ivory);
+  font-size: clamp(2rem, 4vw, 3rem);
+  max-width: 640px;
+}
+.building-parallax-headline .accent { color: var(--champagne); }
+.building-parallax-sub {
+  color: rgba(246, 241, 236, 0.82);
+  font-size: 1.02rem;
+  max-width: 480px;
+  margin-top: -8px;
+}
+.building-parallax-content .btn { margin-top: 12px; }
+
+/* ===================================================================
+   VIDEO TESTIMONIALS — objection handling, sits right above the FAQ
+   =================================================================== */
+.testi-video-section { background: var(--white); }
+.testi-video-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; align-items: start; }
+.testi-vid {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  background: #14170f;
+  box-shadow: var(--shadow-sm);
+}
+/* Bento layout: the moved Mission Viejo clip is the big, full-width main tile (kept
+   at its native 16:10 shot ratio), with the two shorter clips as smaller tiles below. */
+.testi-video-grid.testi-bento { grid-template-columns: 1fr 1fr; gap: 20px; }
+.testi-bento-main { grid-column: 1 / -1; }
+.testi-bento-main .testi-vid { aspect-ratio: 16 / 10; }
+.testi-bento-sub .testi-vid { aspect-ratio: 4 / 3; }
+.testi-vid video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Portrait source video in a landscape tile: show the full frame instead of an
+   extreme center-crop zoom. The tile's own dark background fills the side bars. */
+.testi-vid--portrait video { object-fit: contain; }
+.tv-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(246,241,236,0.94); color: var(--forest);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 30px rgba(1,1,1,0.3);
+  transition: transform 0.25s var(--ease), background 0.25s var(--ease), opacity 0.25s var(--ease);
+  z-index: 2;
+}
+.tv-play svg { margin-left: 3px; }
+.testi-vid:hover .tv-play { transform: translate(-50%, -50%) scale(1.08); background: var(--white); }
+/* Labels now sit below the video, not overlaid on top of it */
+.tv-meta { margin-top: 16px; }
+.tv-loc { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.tv-title { font-family: var(--font-head); font-size: 1.3rem; color: var(--ink); margin-top: 2px; }
+/* Once playing: hand control to the native <video controls> UI, hide the play button */
+.testi-vid.playing { cursor: default; }
+.testi-vid.playing .tv-play { opacity: 0; pointer-events: none; }
+
+/* ===================================================================
+   FAQ / OBJECTIONS — same dark treatment as the testimonials section
+   =================================================================== */
+.faq-section { background: #0d0f0d; }
+.faq-section .section-head h2 { color: var(--ivory); }
+.faq-section .section-head h2 .accent { color: var(--champagne); }
+.faq-section .section-head p { color: rgba(246, 241, 236, 0.68); }
+.faq-section .eyebrow {
+  color: var(--champagne);
+  background: rgba(246, 241, 236, 0.07);
+  border-color: rgba(246, 241, 236, 0.18);
+}
+.faq-section .eyebrow .dot { background: var(--olive); box-shadow: 0 0 0 4px rgba(140,153,101,0.22); }
+.faq-grid { max-width: 780px; margin: 0 auto; }
+.faq {
+  border-bottom: 1px solid rgba(246, 241, 236, 0.12);
+}
+.faq-q {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  background: none; border: none; cursor: pointer;
+  padding: 24px 4px;
+  font-family: var(--font-head); font-size: 1.18rem; font-weight: 600; color: var(--ivory);
+  text-align: left;
+}
+.faq-q .faq-ico {
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid rgba(246, 241, 236, 0.3); color: var(--champagne);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s var(--ease), background 0.3s;
+}
+.faq.open .faq-ico { transform: rotate(45deg); background: var(--olive); color: #14170f; border-color: var(--olive); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease); }
+.faq-a p { color: rgba(246, 241, 236, 0.65); padding: 0 4px 24px; font-size: 0.99rem; }
+
+/* ===================================================================
+   FINAL CTA
+   =================================================================== */
+.cta {
+  padding: 110px 0;
+  /* Forest fallback shows before the video loads / if it fails */
+  background: var(--forest);
+  color: var(--ivory);
+  position: relative;
+  overflow: hidden;
+}
+.cta-bg-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.cta-overlay {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(700px 400px at 15% 10%, rgba(140,153,101,0.45), transparent 60%),
+    linear-gradient(180deg, rgba(35,40,31,0.75) 0%, rgba(35,40,31,0.86) 100%);
+}
+.cta-grid {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.cta .eyebrow { color: var(--ivory); background: rgba(246,241,236,0.14); border-color: rgba(246,241,236,0.22); }
+.cta h2 { color: var(--ivory); font-size: clamp(2.2rem, 5vw, 3.4rem); margin: 20px 0 16px; }
+.cta h2 .accent { color: var(--champagne); }
+.cta-copy p { color: rgba(246,241,236,0.86); font-size: 1.12rem; margin-bottom: 26px; max-width: 440px; }
+.cta-trust-list { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+.cta-trust-list li { display: flex; align-items: center; gap: 11px; font-size: 0.96rem; color: rgba(246,241,236,0.92); }
+.cta-trust-list svg { color: var(--champagne); flex-shrink: 0; }
+.cta-disclaimer { margin-top: 22px; font-size: 0.86rem; color: rgba(246,241,236,0.78); }
+.cta-disclaimer strong { color: var(--ivory); font-weight: 700; }
+
+/* Lead capture card */
+.lead-card {
+  background: var(--ivory);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+}
+.lead-form { display: flex; flex-direction: column; gap: 16px; }
+.lead-row { display: flex; gap: 14px; }
+.lead-field { display: flex; flex-direction: column; gap: 7px; flex: 1; }
+.lead-field label { font-size: 0.82rem; font-weight: 600; color: var(--ink); letter-spacing: 0.01em; }
+.lead-field .req { color: #b1502f; }
+.lead-field input,
+.lead-field textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+.lead-field textarea { resize: vertical; min-height: 78px; }
+.lead-field input::placeholder,
+.lead-field textarea::placeholder { color: #a7a196; }
+.lead-field input:focus,
+.lead-field textarea:focus { border-color: var(--forest); box-shadow: 0 0 0 4px rgba(92,109,98,0.12); }
+.lead-field input.invalid,
+.lead-field textarea.invalid { border-color: #c0563f; box-shadow: 0 0 0 4px rgba(192,86,63,0.1); }
+.lead-form .btn-primary { margin-top: 4px; }
+.lead-note { font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 2px; }
+
+/* Honeypot field: visually hidden off-screen (not display:none/visibility:hidden, which
+   some bots detect and skip) so only automated fillers ever populate it. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.lead-form-msg {
+  font-size: 0.86rem;
+  text-align: center;
+  margin-top: -4px;
+  display: none;
+}
+.lead-form-msg.show { display: block; }
+.lead-form-msg.error { color: #c0563f; }
+
+/* ===================================================================
+   FOOTER
+   =================================================================== */
+.footer { background: var(--black); color: rgba(246,241,236,0.7); padding: 64px 0 30px; }
+.footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
+.footer-brand .fb-logo {
+  font-family: var(--font-head); font-size: 1.9rem; font-weight: 600; color: var(--ivory);
+}
+.footer-brand .fb-logo span { color: var(--olive); }
+.footer-brand .fb-sub { font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--brown); margin-top: -4px; }
+.footer-brand p { font-size: 0.9rem; max-width: 300px; margin-top: 16px; }
+.footer-col h4 { color: var(--ivory); font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700; }
+.footer-col a { display: block; font-size: 0.9rem; padding: 6px 0; transition: color 0.2s; }
+.footer-col a:hover { color: var(--ivory); }
+.footer-address { font-size: 0.86rem; line-height: 1.5; margin-top: 10px; }
+.footer-dre { font-size: 0.82rem; margin-top: 10px; color: var(--brown); }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-top: 26px; border-top: 1px solid rgba(246,241,236,0.1);
+  font-size: 0.82rem; flex-wrap: wrap;
+}
+.footer-bottom .disclaimer { max-width: 620px; font-size: 0.76rem; color: var(--brown); }
+
+/* ===================================================================
+   REVEAL ANIMATION
+   =================================================================== */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ===================================================================
+   RESPONSIVE
+   =================================================================== */
+@media (max-width: 980px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  /* Keep the headline + signup form as the above-the-fold hook; visual follows. */
+  .hero { padding-top: 128px; }
+  /* Center the eyebrow, headline, and subtext on tablet/mobile (desktop has its own
+     centering rules in the min-width:981px block below). */
+  .hero-copy { text-align: center; }
+  .hero-sub { margin-left: auto; margin-right: auto; }
+  .steps { grid-template-columns: 1fr; }
+  /* Tablet: 2 cards per view instead of 3 */
+  .deal-card { flex-basis: calc((100% - 24px) / 2); }
+  .gallery { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(3) { border-left: none; }
+  .stat { border-top: 1px solid rgba(246,241,236,0.14); }
+  .stat:nth-child(1), .stat:nth-child(2) { border-top: none; }
+  .perk-grid { grid-template-columns: 1fr; gap: 40px; }
+  .perk-media { order: -1; }
+  .testi-video-grid { grid-template-columns: 1fr; }
+  .testi-video-grid.testi-bento { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .cta-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+/* Desktop hero: SaaS-style stacked layout, all centered. Headline, subhead, the phone
+   mockup, and CTAs stack in that order (DOM order, matching the markup) inside the single
+   centered .hero-copy column. Placed here, after the base .hero-grid / .hero-copy / .phone
+   rules, so it wins the cascade. */
+@media (min-width: 981px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .hero-copy { display: flex; flex-direction: column; align-items: center; }
+  .hero-sub { margin-left: auto; margin-right: auto; }
+  .hero-actions { justify-content: center; }
+  .phone { width: 340px; }
+  /* Force the headline to break into two lines after "Cash Flow." on desktop only. */
+  .hero h1 .line2 { display: block; }
+
+  /* Value points become glassmorphic cards floating around the phone instead of a grid.
+     z-index above .phone (2) and .phone-frame-img (4) so cards that overlap the phone's
+     edge render in front of the bezel instead of being clipped behind it. */
+  .hero-floats {
+    position: absolute;
+    inset: 0;
+    display: block;
+    max-width: none;
+    margin: 0;
+    pointer-events: none;
+    z-index: 6;
+  }
+  .float-glass {
+    position: absolute;
+    width: max-content;
+    max-width: 188px;
+    gap: 12px;
+    padding: 13px 17px;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.5);
+    -webkit-backdrop-filter: blur(22px) saturate(200%);
+    backdrop-filter: blur(22px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 18px;
+    box-shadow:
+      0 14px 34px rgba(35, 40, 31, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    pointer-events: auto;
+    animation: floaty 6s ease-in-out infinite;
+  }
+  .float-glass .fg-ico {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(155deg, var(--forest), var(--forest-deep));
+    color: var(--ivory);
+    box-shadow: 0 4px 10px rgba(35, 40, 31, 0.25);
+  }
+  /* Pushed further out and clear of the bottom ~45% of the phone, where the
+     notification card sits, so its text stays fully readable. */
+  .float-glass:nth-child(1) { top: 2%; left: -122px; animation-delay: 0s; }
+  .float-glass:nth-child(2) { top: 16%; right: -132px; animation-delay: 1.5s; }
+  .float-glass:nth-child(3) { top: 34%; left: -128px; animation-delay: 3s; }
+  .float-glass:nth-child(4) { top: 48%; right: -122px; animation-delay: 4.5s; }
+
+  /* Flow chart: upgrade the stacked list into the absolute-positioned, uniform-card
+     layout connected by a straight, right-angled line. Cards are opaque and a fixed
+     size, so the connecting line simply disappears underneath them — no need to trim
+     the path to stop short of each node. */
+  .flow { position: relative; aspect-ratio: 1000 / 600; margin-top: 30px; }
+  .flow-svg { display: block; position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  .flow-nodes { position: absolute; inset: 0; display: block; }
+  .flow-node { position: absolute; transform: translate(-50%, -50%); width: 260px; max-width: none; }
+  .flow-node-inner { width: 260px; height: 250px; justify-content: center; }
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@media (max-width: 640px) {
+  .section { padding: 70px 0; }
+  .cta { padding: 70px 0; }
+
+  /* Mobile nav: collapse the links into a hamburger dropdown instead of a cramped
+     pill. Switch the pill to a more traditional rounded-rectangle bar, shrink the
+     logo, and shrink the CTA so it still fits to the left of the burger. */
+  .nav-inner { border-radius: 20px; padding: 10px 14px 10px 16px; }
+  .nav.scrolled .nav-inner { border-radius: 18px; }
+  .nav-logo, .nav.scrolled .nav-logo { height: 32px; }
+  .nav-links { display: none; }
+  .nav-actions { gap: 8px; }
+  .nav-cta .btn { padding: 9px 15px; font-size: 0.8rem; }
+  .nav-burger { display: flex; width: 36px; height: 36px; }
+  .nav-mobile-panel {
+    display: flex;
+    flex-direction: column;
+    max-width: 1120px;
+    margin: 0 auto;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 20px;
+    transition: max-height 0.35s var(--ease), opacity 0.3s var(--ease), margin-top 0.35s var(--ease);
+  }
+  .nav--menu-open .nav-mobile-panel {
+    max-height: 420px;
+    opacity: 1;
+    margin-top: 10px;
+    padding: 10px 22px 22px;
+    box-shadow: 0 14px 34px rgba(35, 40, 31, 0.14);
+  }
+  .nav-mobile-panel .link {
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .nav-mobile-panel .link:last-of-type { border-bottom: none; }
+  .nav-mobile-panel .btn { margin-top: 16px; }
+
+  /* Mobile: 1 card per view, with a peek of the next one */
+  .deal-card { flex-basis: 84vw; }
+  .gallery { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .hero h1 { font-size: clamp(2.4rem, 10vw, 3rem); }
+  .hero-floats { grid-template-columns: 1fr; gap: 12px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  /* Center the trust badge (avatars + text) as a whole block, not just its text */
+  .testi-trust { flex-direction: column; gap: 14px; }
+  .testi-trust .tt-text { text-align: center; }
+  .lead-row { flex-direction: column; }
+  .lead-card { padding: 24px; }
+  .building-parallax { height: 460px; }
+  .building-parallax-content .building-parallax-logo { height: 40px; }
+  .building-parallax-content { gap: 14px; }
+}
